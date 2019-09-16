@@ -39,13 +39,11 @@ let newArr2 = arr2.ownMap2((val) => {
 // konversi huruf ke angka lalu dijumlah
 let calcLetterToNum = (string) => {
     var alphabet = "abcdefghijklmnopqrstuvwxyz"
-    string = string.toLowerCase()
+    string.toLowerCase()
     var value = 0
-
     for(var i = 0; i < string.length; i++) {
         value += alphabet.indexOf(string[i]) + 1
     }
-
     return value
 }
 
@@ -54,14 +52,12 @@ console.log(calcLetterToNum('aabbccdd'))
 // konversi huruf ke angka lalu dijumlah yang angkanya genap
 let calcEvenLetterToNum = (string) => {
     let alphabet = "abcdefghijklmnopqrstuvwxyz"
-    string = string.toLowerCase()
+    string.toLowerCase()
     let value = 0
-
     for(let i = 0; i < string.length; i++) {
         if((alphabet.indexOf(string[i])+1) % 2 == 0)
         value += alphabet.indexOf(string[i]) + 1
     }
-
     return value
 }
 
@@ -70,14 +66,27 @@ console.log(calcEvenLetterToNum('aabbccdd'))
 // konversi huruf ke angka lalu dijumlah yang index input stringnya ganjil
 let calcOddStringToNum = (string) => {
     let alphabet = "abcdefghijklmnopqrstuvwxyz"
-    string = string.toLowerCase()
+    string.toLowerCase()
     let value = 0
-
     for(let i = 1; i < string.length; i+=2) {
         value += alphabet.indexOf(string[i]) + 1
     }
-
     return value
 }
 
 console.log(calcOddStringToNum('aabbccdd'))
+
+// cara 2 untuk konversi huruf ke angka lalu dijumlah yang index input stringnya ganjil
+let calcOddStringToNum2 = (string) => {
+    let alphabet = "abcdefghijklmnopqrstuvwxyz"
+    string.toLowerCase()
+    let value = 0
+    for(let i = 0; i < string.length; i++) {
+        if(i % 2 == 0){
+            value += alphabet.indexOf(string[i]) + 1
+        }
+    }
+    return value
+}
+
+console.log(calcOddStringToNum2('aabbccdd'))
