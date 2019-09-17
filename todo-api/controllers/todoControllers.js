@@ -12,6 +12,13 @@ module.exports = {
         })
     },
 
+    getListByCompleted: (req, res) => {
+        db.query(`select * from todo where is_completed = '${req.query.complete}'`, (err, result) => {
+            if (err) throw err
+            res.send(result)
+        })
+    },
+
     addTodo: (req, res) => {
         db.query(`insert into todo values (0, '${req.body.action}', 0)`, (err, result) => {
             if (err) throw err
