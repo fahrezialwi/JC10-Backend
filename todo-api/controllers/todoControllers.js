@@ -40,11 +40,18 @@ module.exports = {
         })
     },
 
-    deleteTodo : (req, res) => {
+    deleteTodo: (req, res) => {
         var id = req.params.id
         db.query(`delete from todo where id = ${id}`, (err, result) => {
             if (err) throw err
             res.send(result)
         })
-    }
+    },
+
+    getUsersByRole: (req, res) => {
+        db.query(`select * from users where role = '${req.query.role}'`, (err, result) => {
+            if (err) throw err
+            res.send(result)
+        })
+    },
 }
