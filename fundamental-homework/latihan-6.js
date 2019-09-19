@@ -1,4 +1,4 @@
-function countNumber(num) { 
+let countNumber = (num) => { 
     let input =  num.toString(10).split("").map(Number)
     let array = [0,0,0,0,0,0,0,0,0,0]
     for (let i = 0 ; i<input.length ; i++){

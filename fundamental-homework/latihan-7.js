@@ -1,5 +1,5 @@
 // kaprekar's constant
-kaprekarsConstant = (num) => {
+let kaprekarsConstant = (num) => {
     let count = 0
     while (true) {
         count++
@@ -23,7 +23,7 @@ kaprekarsConstant = (num) => {
 // console.log(kaprekarsConstant(7615))
 
 // kaprekar's constant cara 2
-kaprekarsConstant2 = (num) => {
+let kaprekarsConstant2 = (num) => {
     let count = 0
     while (num != 6174) {
         sortedAsc = num.toString().split('').sort((a, b) => a-b).join('')
