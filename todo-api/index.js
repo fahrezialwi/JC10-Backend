@@ -3,7 +3,7 @@ var bodyParser = require ('body-parser')
 var cors = require ('cors')
 
 const app = express()
-const { getRoot, getList, getListByCompleted, addTodo, editTodo, completeAction, deleteTodo } = require('./controllers/todoControllers') 
+const { getRoot, getList, getListByCompleted, addTodo, editTodo, completeAction, deleteTodo, getUsersByRole, getTodoJoinUsers, getUserByUsername } = require('./controllers/todoControllers') 
 const port = 8080
 
 app.use(bodyParser.json())
@@ -33,5 +33,9 @@ app.put('/completeaction', completeAction)
 // delete action data
 // :id -> menjadi req.params
 app.delete('/deletetodo/:id', deleteTodo)
+
+app.get('/getusersbyrole', getUsersByRole)
+app.get('/gettodojoinusers', getTodoJoinUsers)
+app.get('/getuserbyusername', getUserByUsername)
 
 app.listen(port, console.log('Listening to port ' + port))

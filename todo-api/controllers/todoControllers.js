@@ -54,4 +54,28 @@ module.exports = {
             res.send(result)
         })
     },
+
+    getTodoJoinUsers: (req, res) => {
+        db.query(`select * from todo t
+        join users u on t.userId = u.id
+        where u.username = 'seto'`, (err,result) => {
+            let data = {
+                username: result[0].username,
+                todo: []
+            }
+            
+            result.forEach(val => {
+                data.todo.push(val.action)
+            })
+
+            res.send(data)
+        })
+    },
+
+    getUserByUsername: (req, res) => {
+        db.query(`select * from users where username = '${req.query.username}'`, (err, result) => {
+            if (err) throw err
+            res.send(result[0])
+        })
+    }
 }
