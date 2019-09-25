@@ -10,6 +10,7 @@ class Login extends React.Component {
         inputUsername: '',
         inputPassword: '',
         inputUsernameRegister: '',
+        inputEmailRegister: '',
         inputPasswordRegister: '',
         inputPasswordRepeat: '',
         username: '',
@@ -39,17 +40,24 @@ class Login extends React.Component {
     }
 
     onBtnRegister = () => {
-        let {password, username, repeatPassword} = this.refs
-        if(!password.value || !username.value || !repeatPassword.value){
+        let {password, username, email, repeatPassword} = this.refs
+        if(!password.value || !username.value || !email.value ||  !repeatPassword.value){
             swal('Invalid', 'Please fill all input forms', 'error')
         }else{
             if(password.value === repeatPassword.value){
                 Axios.post(URL_API + 'auth/register', {
                     username: username.value,
+                    email: email.value,
                     password: password.value
                 }).then(res => {
                     if (res.data.status === '201'){
-                        swal('Registered!', res.data.message, 'success')
+                        swal('Registration success', 'We have sent you a verification link to your email', 'success')
+                        Axios.get(URL_API + 'auth/sendverifymail', {
+                            params: {
+                                username: username.value,
+                                email: email.value
+                            }
+                        })
                     } else if (res.data.status === '400') {
                         swal('Invalid', res.data.message, 'error')
                     }
@@ -57,7 +65,7 @@ class Login extends React.Component {
                     console.log(err)
                 })
             } else{
-                swal('Invalid', "Your passwords haven't match", 'error')
+                swal('Invalid', "Your password haven't match", 'error')
             }
         }
     }
@@ -107,6 +115,11 @@ class Login extends React.Component {
                             <div className="form-group mt-3 row">
                                 <div className="col-sm-12">
                                     <input type="text" onChange={e => this.setState({inputUsernameRegister: e.target.value})} ref="username" className="form-control" id="inputEmail" placeholder="Username" required autoFocus/>
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <div className="col-sm-12">
+                                    <input type="text" onChange={e => this.setState({inputEmailRegister: e.target.value})} ref="email" className="form-control" id="inputEmail" placeholder="Email" required />
                                 </div>
                             </div>
                             <div className="form-group row">

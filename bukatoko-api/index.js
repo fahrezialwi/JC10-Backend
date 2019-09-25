@@ -11,9 +11,9 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.get('/', (req, res) => {
-    res.send('hehe')
+    res.send('Welcome to Bukatoko API')
 })
 
 app.use('/auth', authRouter)
 
-app.listen(port, () => console.log("Server up in port " + port))
+app.listen(port, console.log('Server up in port ' + port))
