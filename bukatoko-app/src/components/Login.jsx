@@ -40,7 +40,7 @@ class Login extends React.Component {
     }
 
     onBtnRegister = () => {
-        let {password, username, email, repeatPassword} = this.refs
+        let { password, username, email, repeatPassword } = this.refs
         if(!password.value || !username.value || !email.value ||  !repeatPassword.value){
             swal('Invalid', 'Please fill all input forms', 'error')
         }else{
@@ -52,12 +52,6 @@ class Login extends React.Component {
                 }).then(res => {
                     if (res.data.status === '201'){
                         swal('Registration success', 'We have sent you a verification link to your email', 'success')
-                        Axios.get(URL_API + 'auth/sendverifymail', {
-                            params: {
-                                username: username.value,
-                                email: email.value
-                            }
-                        })
                     } else if (res.data.status === '400') {
                         swal('Invalid', res.data.message, 'error')
                     }
@@ -65,7 +59,7 @@ class Login extends React.Component {
                     console.log(err)
                 })
             } else{
-                swal('Invalid', "Your password haven't match", 'error')
+                swal('Invalid', "Password did not match", 'error')
             }
         }
     }
@@ -107,39 +101,39 @@ class Login extends React.Component {
                     }
                 </form>
             )
-        }else{
+        } else {
             return (
                 <form className="border-0 mb-3 text-center" style={{padding:"20px", borderRadius:"5%"}} ref="formLogin">
-                        <h4>REGISTER</h4>
-                        <fieldset>
-                            <div className="form-group mt-3 row">
-                                <div className="col-sm-12">
-                                    <input type="text" onChange={e => this.setState({inputUsernameRegister: e.target.value})} ref="username" className="form-control" id="inputEmail" placeholder="Username" required autoFocus/>
-                                </div>
+                    <h4>REGISTER</h4>
+                    <fieldset>
+                        <div className="form-group mt-3 row">
+                            <div className="col-sm-12">
+                                <input type="text" onChange={e => this.setState({inputUsernameRegister: e.target.value})} ref="username" className="form-control" id="inputEmail" placeholder="Username" required autoFocus/>
                             </div>
-                            <div className="form-group row">
-                                <div className="col-sm-12">
-                                    <input type="text" onChange={e => this.setState({inputEmailRegister: e.target.value})} ref="email" className="form-control" id="inputEmail" placeholder="Email" required />
-                                </div>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-sm-12">
+                                <input type="text" onChange={e => this.setState({inputEmailRegister: e.target.value})} ref="email" className="form-control" id="inputEmail" placeholder="Email" required />
                             </div>
-                            <div className="form-group row">
-                                <div className="col-sm-12">
-                                    <input type="password" onChange={e => this.setState({inputPasswordRegister: e.target.value})} ref="password" className="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.renderOnKeyPress} required />
-                                </div>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-sm-12">
+                                <input type="password" onChange={e => this.setState({inputPasswordRegister: e.target.value})} ref="password" className="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.renderOnKeyPress} required />
                             </div>
-                            <div className="form-group row">
-                                <div className="col-sm-12">
-                                    <input type="password" onChange={e => this.setState({inputPasswordRepeat: e.target.value})} ref="repeatPassword" className="form-control" id="inputPassword" placeholder="Repeat Password" onKeyPress={this.renderOnKeyPress} required />
-                                </div>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-sm-12">
+                                <input type="password" onChange={e => this.setState({inputPasswordRepeat: e.target.value})} ref="repeatPassword" className="form-control" id="inputPassword" placeholder="Repeat Password" onKeyPress={this.renderOnKeyPress} required />
                             </div>
-                            <div className="btn my-auto"><p>Already have an account? <Link onClick={() => this.setState({isLoginPage: true})} className="border-bottom">Login</Link></p></div>
-                            <div className="form-group row">
-                                <div className="col-12" style={{textAlign:'center'}}>
-                                    <input type="button" onClick={this.onBtnRegister} value="REGISTER" style={{fontSize:'12px', height:'38px'}} className="btn btn-block login-btn text-white font-weight-bold"/>
-                                </div>
+                        </div>
+                        <div className="btn my-auto"><p>Already have an account? <Link onClick={() => this.setState({isLoginPage: true})} className="border-bottom">Login</Link></p></div>
+                        <div className="form-group row">
+                            <div className="col-12" style={{textAlign:'center'}}>
+                                <input type="button" onClick={this.onBtnRegister} value="REGISTER" style={{fontSize:'12px', height:'38px'}} className="btn btn-block login-btn text-white font-weight-bold"/>
                             </div>
-                        </fieldset>
-                    </form>
+                        </div>
+                    </fieldset>
+                </form>
             )
         }
     }
