@@ -1,5 +1,6 @@
 const db = require('../database')
 const nodemailer = require('nodemailer')
+const fs = require('fs')
 var { pdfcreate } = require('../helpers/htmlPdf')
 
 let transporter = nodemailer.createTransport({
@@ -94,12 +95,28 @@ module.exports = {
 
         let replacements = {
             username: req.query.username,
-            date: `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
+            date: `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`,
+            data: ['Loop', 'Function', 'in', 'Handlebars']
         }
 
         pdfcreate('./pdf-templates/first-template.html', replacements, options, (stream) => {
-            res.attachment('test.pdf')
+            // kirim ke browser
+            res.attachment(`${req.query.username}-${date.getFullYear()}${date.getMonth()+1}${date.getDate()}.pdf`)
             stream.pipe(res)
+            
+            // kirim ke attachment email
+            transporter.sendMail({
+                from: 'Cravel Trip <craveltrip@gmail.com>',
+                to: 'fahrezialwi@gmail.com',
+                subject: 'Testing attachment',
+                html: 'This is an attachment',
+                attachments: [
+                    {
+                        filename: `${req.query.username}-${date.getFullYear()}${date.getMonth()+1}${date.getDate()}.pdf`,
+                        content: fs.createReadStream(stream.path)
+                    }
+                ]
+            })
         })
     }
 }
