@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import querystring from 'query-string'
-const URL_API = 'http://localhost:1912/'
+const URL_API = 'http://search-filter-api.herokuapp.com/'
 
 class Filter extends Component {
     constructor(props){
