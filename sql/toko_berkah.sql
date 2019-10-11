@@ -42,3 +42,17 @@ and t.totalIncome >
 (select avg(t.totalIncome) from toko as t 
 join kota as k on t.kotaId = k.id 
 where k.nama = 'Bandung');
+
+select t.id as id_toko, t.nama as nama_toko, t.alamat,
+t.totalIncome as total_income, t.tanggalBerdiri as tanggal_berdiri,
+k.id as id_kota, k.nama as nama_kota, 
+date_format(tanggalBerdiri, '%Y') as tahun,
+date_format(tanggalBerdiri, '%M') as bulan,
+date_format(tanggalBerdiri, '%a') as hari
+from toko as t join kota as k on t.kotaId = k.id
+where t.tanggalBerdiri between '2017-12-01' and '2018-12-01'
+and k.nama in ('Jakarta','Tangerang')
+and t.totalIncome > 
+(select avg(t.totalIncome) from toko as t 
+join kota as k on t.kotaId = k.id 
+where k.nama = 'Bandung');
