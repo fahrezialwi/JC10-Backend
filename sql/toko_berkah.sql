@@ -5,6 +5,8 @@ select * from toko;
 
 select * from toko order by totalIncome desc;
 
+select * from toko where totalIncome = (select max(totalIncome) from toko);
+
 select k.nama as nama_kota, count(t.nama) as jumlah_toko from kota as k
 join toko as t on k.id = t.kotaId
 group by k.nama;
